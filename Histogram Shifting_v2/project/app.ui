@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#centralwidget {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2c3e50, stop:1 #000000);
+}</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,2,2,1">
+    <item>
+     <layout class="QHBoxLayout" name="layout_buttons">
+      <item>
+       <widget class="QPushButton" name="btn_load">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #34495e;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: #3498db;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Load Image</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_rdh">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#btn_rdh {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
+        stop:0 #f39c12, 
+        stop:1 #e67e22);
+    
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 8px;       
+    min-height: 35px;
+}
+
+#btn_rdh:hover {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
+        stop:0 #ffb347, 
+        stop:1 #f39c12);
+    border: 1px solid #ffffff; 
+}
+
+#btn_rdh:pressed {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
+        stop:0 #d35400, 
+        stop:1 #e67e22);
+ 
+}</string>
+        </property>
+        <property name="text">
+         <string>Run RDH</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_save_stego">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #34495e;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: #3498db;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Save Stego</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bth_save_restore">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #34495e;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: #3498db;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Save Restored</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_clear">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #34495e;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: #3498db;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layout_img">
+      <item>
+       <widget class="QLabel" name="img_ori">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Original image</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    background-color: rgba(255, 255, 255, 10); 
+    border: 2px solid #555;
+    border-radius: 5px; 
+    padding: 5px;
+}
+QLabel:hover {
+    border: 2px solid #3498db; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="img_stego">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Stego image</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    background-color: rgba(255, 255, 255, 10); 
+    border: 2px solid #555;
+    border-radius: 5px; 
+    padding: 5px;
+}
+QLabel:hover {
+    border: 2px solid #3498db; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="img_restored">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Restored image</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    background-color: rgba(255, 255, 255, 10); 
+    border: 2px solid #555;
+    border-radius: 5px; 
+    padding: 5px;
+}
+QLabel:hover {
+    border: 2px solid #3498db; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layout_hist">
+      <item>
+       <widget class="QLabel" name="hist_ori">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Original Histogram</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    background-color: rgba(255, 255, 255, 10); 
+    border: 2px solid #555;
+    border-radius: 5px; 
+    padding: 5px;
+}
+QLabel:hover {
+    border: 2px solid #3498db; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="hist_stego">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Stego histogram</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    background-color: rgba(255, 255, 255, 10); 
+    border: 2px solid #555;
+    border-radius: 5px; 
+    padding: 5px;
+}
+QLabel:hover {
+    border: 2px solid #3498db; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="hist_restore">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Restored histogram</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    background-color: rgba(255, 255, 255, 10); 
+    border: 2px solid #555;
+    border-radius: 5px; 
+    padding: 5px;
+}
+QLabel:hover {
+    border: 2px solid #3498db; 
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="layout_metrics">
+      <item>
+       <widget class="QTableWidget" name="metrics">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* Bảng Metrics */
+QTableWidget {
+    background-color: #1e1e1e;
+    gridline-color: #3d3d3d;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+QHeaderView::section {
+    background-color: #1a1a2e;
+    color: #00d4ff;
+    font-weight: bold;
+    border: none;
+}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
