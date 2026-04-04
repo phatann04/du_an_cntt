@@ -1,0 +1,6 @@
+Quy trình thuật toán Difference Expansion
+1. Đọc ảnh
+2. Chia ảnh thành cặp pixel
+3. Nhúng dữ liệu 
+4. Tạo ảnh Stego
+5. Trích xuất và phục hồi
