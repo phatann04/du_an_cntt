@@ -29,9 +29,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setEnabled(True)
-        self.centralwidget.setStyleSheet(u"#centralwidget {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2c3e50, stop:1 #000000);\n"
-"}")
+        self.centralwidget.setStyleSheet(u"")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.layout_buttons = QHBoxLayout()
@@ -42,8 +40,8 @@ class Ui_MainWindow(object):
         self.btn_load.setMinimumSize(QSize(0, 35))
         self.btn_load.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_load.setStyleSheet(u"QPushButton {\n"
-"    background-color: #34495e;\n"
-"    color: white;\n"
+"    background-color: rgb(218, 218, 218);\n"
+"    color: black;\n"
 "    border-radius: 8px;\n"
 "    font-weight: bold;\n"
 "    font-family: \"Segoe UI\";\n"
@@ -60,11 +58,9 @@ class Ui_MainWindow(object):
         self.btn_rdh.setMinimumSize(QSize(0, 35))
         self.btn_rdh.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_rdh.setStyleSheet(u"#btn_rdh {\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, \n"
-"        stop:0 #f39c12, \n"
-"        stop:1 #e67e22);\n"
+"    background-color: rgb(218, 218, 218);\n"
 "    \n"
-"    color: white;\n"
+"    color: black;\n"
 "    font-weight: bold;\n"
 "    font-size: 13px;\n"
 "    border-radius: 8px;       \n"
@@ -92,8 +88,8 @@ class Ui_MainWindow(object):
         self.btn_save_stego.setMinimumSize(QSize(0, 35))
         self.btn_save_stego.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save_stego.setStyleSheet(u"QPushButton {\n"
-"    background-color: #34495e;\n"
-"    color: white;\n"
+"    background-color: rgb(218, 218, 218);\n"
+"    color: black;\n"
 "    border-radius: 8px;\n"
 "    font-weight: bold;\n"
 "    font-family: \"Segoe UI\";\n"
@@ -110,8 +106,8 @@ class Ui_MainWindow(object):
         self.bth_save_restore.setMinimumSize(QSize(0, 35))
         self.bth_save_restore.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.bth_save_restore.setStyleSheet(u"QPushButton {\n"
-"    background-color: #34495e;\n"
-"    color: white;\n"
+"    background-color: rgb(218, 218, 218);\n"
+"    color: black;\n"
 "    border-radius: 8px;\n"
 "    font-weight: bold;\n"
 "    font-family: \"Segoe UI\";\n"
@@ -128,8 +124,8 @@ class Ui_MainWindow(object):
         self.btn_clear.setMinimumSize(QSize(35, 35))
         self.btn_clear.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_clear.setStyleSheet(u"QPushButton {\n"
-"    background-color: #34495e;\n"
-"    color: white;\n"
+"    background-color: rgb(218, 218, 218);\n"
+"    color: black;\n"
 "    border-radius: 8px;\n"
 "    font-weight: bold;\n"
 "    font-family: \"Segoe UI\";\n"
@@ -271,20 +267,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         font.setBold(True)
         self.metrics.setFont(font)
-        self.metrics.setStyleSheet(u"/* B\u1ea3ng Metrics */\n"
-"QTableWidget {\n"
-"    background-color: #1e1e1e;\n"
-"    gridline-color: #3d3d3d;\n"
-"    color: #ffffff;\n"
-"    border-radius: 8px;\n"
-"}\n"
-"\n"
-"QHeaderView::section {\n"
-"    background-color: #1a1a2e;\n"
-"    color: #00d4ff;\n"
-"    font-weight: bold;\n"
-"    border: none;\n"
-"}")
+        self.metrics.setStyleSheet(u"")
 
         self.layout_metrics.addWidget(self.metrics)
 
@@ -302,7 +285,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Histogram Shifting", None))
         self.btn_load.setText(QCoreApplication.translate("MainWindow", u"Load Image", None))
         self.btn_rdh.setText(QCoreApplication.translate("MainWindow", u"Run RDH", None))
         self.btn_save_stego.setText(QCoreApplication.translate("MainWindow", u"Save Stego", None))

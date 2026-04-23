@@ -9,9 +9,9 @@ from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtCore import Qt
 
 # Import class từ file rdh_logic.py của ông
-from rdh_logic import RDH 
+from hs_logic import RDH
 # Import UI từ file đã convert (đổi tên cho đúng file của ông)
-from ui_app import Ui_MainWindow 
+from app_ui import Ui_MainWindow 
 class RDH_Application(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -52,16 +52,23 @@ class RDH_Application(QMainWindow):
         self.ui.metrics.verticalHeader().setVisible(False)
 
     def get_hist_pixmap(self, cv_img, title):
-        """Vẽ histogram chuẩn Matplotlib cho báo cáo"""
-        fig, ax = plt.subplots(figsize=(2.8, 2.0), dpi=100)
+        # Tạo figure một cách im lặng (không dùng pyplot để tránh xung đột window)
+        from matplotlib.figure import Figure
+        
+        fig = Figure(figsize=(2.8, 2.0), dpi=100)
+        ax = fig.add_subplot(111)
+        
+        # Vẽ histogram
         ax.hist(cv_img.ravel(), bins=256, range=[0, 256], color='teal', alpha=0.7)
         ax.set_title(title, fontsize=9, fontweight='bold')
-        plt.tight_layout()
+        fig.tight_layout()
         
+        # Chuyển thành Pixmap
         canvas = FigureCanvasAgg(fig)
         canvas.draw()
-        rgba = np.frombuffer(canvas.buffer_rgba(), dtype='uint8').reshape(canvas.get_width_height()[1], canvas.get_width_height()[0], 4)
-        plt.close(fig)
+        rgba = np.frombuffer(canvas.buffer_rgba(), dtype='uint8').reshape(
+            canvas.get_width_height()[1], canvas.get_width_height()[0], 4)
+        
         return QPixmap.fromImage(QImage(rgba.data, rgba.shape[1], rgba.shape[0], QImage.Format_RGBA8888))
 
     def display_cv_image(self, cv_img, label_widget):
@@ -92,7 +99,7 @@ class RDH_Application(QMainWindow):
 
         # 2. Bước Analyze
         p, z, h, use_border = self.engine.analyze_image(self.cv_img_orig)
-
+        peaks_info = self.engine.peaks_info
         # 3. Bước Embed
         self.cv_img_stego, embedded_bits, loc_map = self.engine.embed_data(
             self.cv_img_orig, p, z, h, use_border, input_bits
@@ -130,16 +137,26 @@ class RDH_Application(QMainWindow):
 
         # Điền bảng Metrics
         is_reversible = np.array_equal(self.cv_img_orig, self.cv_img_restored)
+
         data = [
-            ("Peak Pixel (P)", p),
-            ("Zero Pixel (Z)", z),
-            ("Sức chứa (Capacity)", f"{h} bits"),
+            ("Số cặp Peak–Zero", len(peaks_info)),
+        ]
+
+        # Thêm từng cặp Peak–Zero vào bảng
+        for i, (p_i, z_i, h_i, _) in enumerate(peaks_info, start=1):
+            data.append((f"Peak {i}", p_i))
+            data.append((f"Zero {i}", z_i))
+            data.append((f"Capacity {i}", f"{h_i} bits"))
+
+        # Thông số tổng hợp
+        data.extend([
+            ("Tổng sức chứa", f"{h} bits"),
             ("PSNR", f"{psnr:.2f} dB"),
             ("SSIM", f"{ssim_val:.4f}"),
             ("BPP", f"{bpp:.4f}"),
             ("Tin trích xuất", decoded_text),
             ("Tính thuận nghịch", "Hoàn hảo ✅" if is_reversible else "Thất bại ❌")
-        ]
+        ])
         
         self.ui.metrics.setRowCount(len(data))
         for i, (k, v) in enumerate(data):
@@ -154,35 +171,22 @@ class RDH_Application(QMainWindow):
         if path: cv2.imwrite(path, img)
 
     def interactive_histogram(self, cv_img, title):
-        if cv_img is None: 
-            QMessageBox.warning(self, "Lỗi", "Ảnh chưa được load!")
-            return
+        if cv_img is None: return
         
-        # Bật lại chế độ tương tác để tránh bị block GUI
-        plt.ion() 
+        # Tạm thời bật chế độ hội thoại
+        plt.ioff() # Tắt tương tác tự động để kiểm soát thủ công
         
-        # Tạo hoặc lấy figure theo tên title
-        fig = plt.figure(num=title, figsize=(10, 6))
-        fig.clf() # Xóa nội dung cũ để vẽ mới
-        
-        ax = fig.add_subplot(111)
-        
-        # Vẽ histogram
+        fig, ax = plt.subplots(figsize=(8, 5))
         ax.hist(cv_img.ravel(), bins=256, range=[0, 256], 
-                color='teal', alpha=0.7, histtype='stepfilled', 
-                edgecolor='black', linewidth=0.5)
+                color='teal', alpha=0.7, edgecolor='black')
         
-        ax.set_title(f"Cửa sổ soi chi tiết: {title}")
-        ax.set_xlabel("Giá trị Pixel (0-255)")
+        ax.set_title(f"Chi tiết: {title}")
+        ax.set_xlabel("Giá trị Pixel")
         ax.set_ylabel("Số lượng")
-        ax.grid(True, which='both', linestyle='--', alpha=0.5)
+        ax.grid(True, alpha=0.3)
         
-        # Ép Matplotlib vẽ và hiển thị
-        fig.canvas.draw()
-        plt.show()
-        
-        # Nâng cửa sổ lên trên cùng (đôi khi nó hiện đằng sau main window)
-        fig.canvas.manager.window.raise_()
+        plt.show() # Cửa sổ này sẽ chặn nhẹ app cho đến khi đóng, giúp ổn định dữ liệu
+
     def clear_all(self):
         # 1. Reset các biến dữ liệu ảnh về None
         self.cv_img_orig = None
